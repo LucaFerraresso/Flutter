@@ -58,7 +58,7 @@ class _CounterWidgetState extends State<CounterWidget>
         borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: Colors.grey.withValues(blue: double.infinity),
             spreadRadius: 2,
             blurRadius: 5,
           ),

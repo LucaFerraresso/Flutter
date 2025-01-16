@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ChatBotAPI {
-  static Future<String> getBotResponse(String question) async {
+  static Future<String> sendMessage(String message) async {
     final String? baseUrl = dotenv.env['BASE_URL'];
     final String? apiKey = dotenv.env['API_KEY'];
 
@@ -12,12 +12,12 @@ class ChatBotAPI {
     }
 
     final response = await http.post(
-      Uri.parse('$baseUrl/chat'),
+      Uri.parse(baseUrl),
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': 'Bearer $apiKey',
+        'Content-Type': 'application/json',
       },
-      body: json.encode({'question': question}),
+      body: jsonEncode({'message': message}),
     );
 
     if (response.statusCode == 200) {

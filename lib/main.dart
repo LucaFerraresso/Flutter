@@ -4,7 +4,7 @@ import 'login_page.dart';
 
 Future<void> main() async {
   // Assicurati che le variabili siano caricate prima di avviare l'app
-  await dotenv.load(fileName: 'web/.env');
+  await dotenv.load(fileName: 'assets/web/.env');
   runApp(const MyApp());
 }
 

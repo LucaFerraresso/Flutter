@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'chatbot_api.dart'; // Importa la classe che gestisce le API
 
 class ChatBotPage extends StatefulWidget {
-  const ChatBotPage({super.key}); // Usa Key al posto di super.key per coerenza
+  const ChatBotPage({super.key}); // Utilizza super.key come super parameter
 
   @override
-  ChatBotPageState createState() =>
-      ChatBotPageState(); // Rendi la classe pubblica
+  ChatBotPageState createState() => ChatBotPageState();
 }
 
 class ChatBotPageState extends State<ChatBotPage> {
@@ -21,7 +20,8 @@ class ChatBotPageState extends State<ChatBotPage> {
       });
 
       try {
-        final response = await ChatBotAPI.getBotResponse(question);
+        // Usa il metodo `sendMessage` definito in `ChatBotAPI`
+        final response = await ChatBotAPI.sendMessage(question);
         setState(() {
           _response = response; // Visualizza la risposta del bot
         });
