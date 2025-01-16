@@ -12,6 +12,9 @@
 .swiftpm/
 migrate_working_dir/
 
+keyrsa.txt
+keyrsa.txt.pub
+
 # IntelliJ related
 *.iml
 *.ipr
