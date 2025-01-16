@@ -37,6 +37,8 @@ dependencies:
 
   http: ^1.2.2 # Aggiungi questa riga per usare la versione più recente del pacchetto http
   flutter_dotenv: ^5.0.2
+  shared_preferences: ^2.0.15
+  logger: ^1.2.2
 
 dev_dependencies:
   flutter_test:

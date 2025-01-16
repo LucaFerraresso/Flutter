@@ -1,12 +1,29 @@
+// dashboard_page.dart
+import 'package:first_android_app_luca/login_page.dart';
 import 'package:flutter/material.dart';
-import 'counter_widget.dart';
-import 'chat_bot_page.dart'; // Aggiungi l'import per la ChatBotPage
+import 'package:shared_preferences/shared_preferences.dart';
+import 'chat_bot_page.dart';
 
 class DashboardPage extends StatelessWidget {
   final String? name;
   final String? email;
 
   const DashboardPage({super.key, this.name, this.email});
+
+  // Funzione di logout
+  Future<void> _logout(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // Rimuovi solo lo stato di login, ma non le credenziali salvate
+    await prefs.remove('is_logged_in');
+
+    if (context.mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,39 +34,43 @@ class DashboardPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: CounterWidget(),
+          ListTile(
+            title: Text('Benvenuto, ${name ?? 'User'}!'),
+            subtitle: Text('Email: ${email ?? 'Non fornita'}'),
           ),
-          Divider(color: Colors.grey.shade700),
-          Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Welcome, ${name ?? 'User'}!',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Email: ${email ?? 'Not Provided'}',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  const SizedBox(height: 20),
-                  // Pulsante per navigare alla ChatBotPage
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ChatBotPage()),
-                      );
-                    },
-                    child: const Text('Go to Chatbot'),
-                  ),
-                ],
-              ),
+          const Divider(),
+          ListTile(
+            title: const Text('Esercizi'),
+            leading: const Icon(Icons.fitness_center),
+            onTap: () {
+              // Naviga alla sezione Esercizi
+            },
+          ),
+          ListTile(
+            title: const Text('Chatbot'),
+            leading: const Icon(Icons.chat),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ChatBotPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Modifica Profilo'),
+            leading: const Icon(Icons.person),
+            onTap: () {
+              // Naviga alla sezione per modificare il profilo
+            },
+          ),
+          const Divider(),
+          ElevatedButton(
+            onPressed: () => _logout(context),
+            style: ElevatedButton.styleFrom(
+              iconColor: Colors.redAccent,
+              padding: const EdgeInsets.symmetric(vertical: 12),
             ),
+            child: const Text('Logout'),
           ),
         ],
       ),
