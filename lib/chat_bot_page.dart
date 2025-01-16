@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'chatbot_api.dart'; // Importa la classe che gestisce le API
 
 class ChatBotPage extends StatefulWidget {
-  const ChatBotPage({super.key});
+  const ChatBotPage({super.key}); // Usa Key al posto di super.key per coerenza
 
   @override
-  _ChatBotPageState createState() => _ChatBotPageState();
+  ChatBotPageState createState() =>
+      ChatBotPageState(); // Rendi la classe pubblica
 }
 
-class _ChatBotPageState extends State<ChatBotPage> {
+class ChatBotPageState extends State<ChatBotPage> {
   final TextEditingController _controller = TextEditingController();
   String _response = '';
 
@@ -56,7 +57,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
             const SizedBox(height: 20),
             Text(
               _response,
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
           ],
         ),

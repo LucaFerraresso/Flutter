@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'login_page.dart';
 
-void main() {
+Future<void> main() async {
+  // Assicurati che le variabili siano caricate prima di avviare l'app
+  await dotenv.load(fileName: 'web/.env');
   runApp(const MyApp());
 }
 
