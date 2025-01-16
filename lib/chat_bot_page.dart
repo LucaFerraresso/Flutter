@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'chatbot_api.dart';
+import 'chatbot_api.dart'; // Importa la classe che gestisce le API
 
 class ChatBotPage extends StatefulWidget {
   const ChatBotPage({super.key});
@@ -16,17 +16,18 @@ class _ChatBotPageState extends State<ChatBotPage> {
     final question = _controller.text;
     if (question.isNotEmpty) {
       setState(() {
-        _response = 'Thinking...';
+        _response = 'Thinking...'; // Visualizza il messaggio durante l'attesa
       });
 
       try {
         final response = await ChatBotAPI.getBotResponse(question);
         setState(() {
-          _response = response;
+          _response = response; // Visualizza la risposta del bot
         });
       } catch (e) {
         setState(() {
-          _response = 'Sorry, I couldn\'t understand that.';
+          _response =
+              'Sorry, I couldn\'t understand that.'; // Gestione degli errori
         });
       }
     }
