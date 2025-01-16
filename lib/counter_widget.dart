@@ -46,6 +46,8 @@ class _CounterWidgetState extends State<CounterWidget>
   void _resetCounter() {
     setState(() {
       _counter = 0;
+      _animationController.forward(
+          from: 0.0); // Optional: Reset animation when reset
     });
   }
 
@@ -54,13 +56,13 @@ class _CounterWidgetState extends State<CounterWidget>
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: Colors.blue[50],
         borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(blue: double.infinity),
-            spreadRadius: 2,
-            blurRadius: 5,
+            color: Color.fromRGBO(158, 158, 158, 1.0),
+            blurRadius: 5.0,
+            spreadRadius: 2.0,
           ),
         ],
       ),
@@ -70,18 +72,24 @@ class _CounterWidgetState extends State<CounterWidget>
         children: [
           const Text(
             'Counter Example',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           ScaleTransition(
             scale: _animationController
                 .drive(CurveTween(curve: Curves.elasticOut)),
             child: Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: Colors.black,
+                  ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -89,22 +97,31 @@ class _CounterWidgetState extends State<CounterWidget>
                 onPressed: _decrementCounter,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.redAccent,
+                  foregroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 child: const Text('-'),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 15),
               ElevatedButton(
                 onPressed: _resetCounter,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
+                  foregroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 child: const Text('Reset'),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 15),
               ElevatedButton(
                 onPressed: _incrementCounter,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 child: const Text('+'),
               ),
